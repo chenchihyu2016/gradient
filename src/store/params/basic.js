@@ -9,18 +9,22 @@ const initialState = {
         { row: 4, column: 5, difficulty: 7 },
         { row: 4, column: 6, difficulty: 8 },
     ],
-    passedLevels: new Array(),
+    passedLevels: [],
+    isMobile: window.innerHeight > window.innerWidth,
     // passedLevels: [
     //     2, 3, 4, 5, 6, 7, 8
     // ],
 };
 
 const getters = {
-    getPassedLevels (state) {
+    getPassedLevels(state) {
         return state.passedLevels;
     },
-    getLevels (state) {
+    getLevels(state) {
         return state.levels;
+    },
+    isMobile(state) {
+        return state.isMobile
     }
 };
 
@@ -29,8 +33,11 @@ const actions = {
 };
 
 const mutations = {
-    setDifficulty (state, difficulty) {
+    setDifficulty(state, difficulty) {
         state.passedLevels.push(difficulty);
+    },
+    setIsMobile(state, isMobile) {
+        state.isMobile = isMobile
     }
 };
 

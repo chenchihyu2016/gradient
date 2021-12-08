@@ -1,11 +1,11 @@
 <template>
-	<transition mode="out-in" name="fade">
-		<component :is="layout">
-			<transition mode="out-in" name="fade">
-				<router-view></router-view>
-			</transition>
-		</component>
-	</transition>
+    <transition mode="out-in" name="fade">
+        <component :is="layout">
+            <transition mode="out-in" name="fade">
+                <router-view></router-view>
+            </transition>
+        </component>
+    </transition>
 </template>
 
 <script>
@@ -13,23 +13,33 @@ import VIndex from "@/layout/VIndex.vue";
 import VLetter from "@/layout/VLetter.vue";
 
 export default {
-	data() {
-		return {
-			layout: "VIndex",
-		};
-	},
-	components: {
-		VIndex,
-		VLetter,
-	},
-	watch: {
-		$route: function () {
-			const _this = this;
-			const $route = _this.$route;
+    data() {
+        return {
+            layout: "VIndex",
+        };
+    },
+    components: {
+        VIndex,
+        VLetter,
+    },
+    mounted() {
+        window.addEventListener("resize", () => {
+            const _this = this;
 
-			_this.layout = $route.meta.layout;
-		},
-	},
+            _this.$store.commit(
+                "setIsMobile",
+                window.innerHeight > window.innerWidth
+            );
+        });
+    },
+    watch: {
+        $route: function () {
+            const _this = this;
+            const $route = _this.$route;
+
+            _this.layout = $route.meta.layout;
+        },
+    },
 };
 </script>
 
@@ -38,22 +48,22 @@ export default {
 @import "@/assets/scss/transition";
 @import "@/assets/scss/normalize";
 #app {
-	font-family: Avenir, Helvetica, Arial, sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	text-align: center;
-	color: #2c3e50;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
 }
 #nav {
-	padding: 30px;
+    padding: 30px;
 
-	a {
-		font-weight: bold;
-		color: #2c3e50;
+    a {
+        font-weight: bold;
+        color: #2c3e50;
 
-		&.router-link-exact-active {
-			color: #42b983;
-		}
-	}
+        &.router-link-exact-active {
+            color: #42b983;
+        }
+    }
 }
 </style>
