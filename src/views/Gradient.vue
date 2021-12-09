@@ -259,6 +259,7 @@ export default {
             border-radius: 5px;
             border: 1px solid $color-black;
             box-sizing: border-box;
+            cursor: pointer;
         }
 
         .selected {
