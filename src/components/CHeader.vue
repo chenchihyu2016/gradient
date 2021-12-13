@@ -1,7 +1,12 @@
 <template>
     <div class="header">
+        <div class="menuToggler" v-if="!isMobile && !isNavOpen">+</div>
         <transition mode="out-in" name="fade" appear>
-            <router-link v-if="isShow" :to="{ name: 'Letter' }" class="unlock">
+            <router-link
+                v-if="showUnlock"
+                :to="{ name: 'Letter' }"
+                class="unlock"
+            >
                 解鎖</router-link
             >
         </transition>
@@ -11,7 +16,7 @@
 <script>
 export default {
     computed: {
-        isShow: function () {
+        showUnlock() {
             const _this = this;
             const $store = _this.$store;
 
@@ -22,6 +27,12 @@ export default {
                 $store.getters.getLevels.length
             );
         },
+        isMobile() {
+            return this.$store.getters.isMobile;
+        },
+        isNavOpen() {
+            return this.$store.getters.isNavOpen;
+        },
     },
 };
 </script>
@@ -30,9 +41,25 @@ export default {
 .header {
     @include flex(center, center);
     width: 100%;
-    height: 10vh;
+    height: 8vh;
     border-bottom: 2px solid $color-gray;
     box-sizing: border-box;
+    position: relative;
+
+    .menuToggler {
+        @include flex(center, center);
+        cursor: pointer;
+        position: absolute;
+        width: 50px;
+        left: 0;
+        top: 0;
+        bottom: 0;
+
+        &:hover {
+            background: $color-gray;
+            color: $color-white;
+        }
+    }
 
     .unlock {
         @include flex(center, center);

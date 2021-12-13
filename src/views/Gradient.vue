@@ -69,8 +69,6 @@ export default {
             const _this = this;
             const array = _this.array;
 
-            console.log(_this.row, _this.column);
-
             const quantity = _this.row * _this.column;
             const colorSet = _this.colorSet;
             const colorBoundary = _this.colorInit();
@@ -200,8 +198,10 @@ export default {
                 });
 
                 if (bool) {
-                    _this.success = true;
-                    $store.commit("setDifficulty", _this.level.difficulty);
+                    setTimeout(() => {
+                        _this.success = true;
+                        $store.commit("setDifficulty", _this.level.difficulty);
+                    }, 500);
 
                     setTimeout(() => {
                         _this.success = false;
@@ -257,7 +257,7 @@ export default {
             transition: 0.6s all ease;
             vertical-align: top;
             border-radius: 5px;
-            border: 1px solid $color-black;
+            border: 1px solid $color-white;
             box-sizing: border-box;
             cursor: pointer;
         }

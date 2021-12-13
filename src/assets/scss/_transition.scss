@@ -26,21 +26,22 @@
 .component-leave-to,
 .component-enter {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(10px);
 }
 
 .slide-fade-enter-active,
 .slide-fade-leave-active {
-    transition: 0.6s all ease;
+    transition: 0.3s all ease;
 }
 
 .slide-fade-enter-to,
 .slide-fade-leave {
     opacity: 1;
+    margin-left: 0;
 }
 
 .slide-fade-leave-to,
 .slide-fade-enter {
     opacity: 0;
-    transform: translateX(30px);
+    margin-left: -80%;
 }

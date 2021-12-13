@@ -11,9 +11,7 @@ const initialState = {
     ],
     passedLevels: [],
     isMobile: window.innerHeight > window.innerWidth,
-    // passedLevels: [
-    //     2, 3, 4, 5, 6, 7, 8
-    // ],
+    isNavOpen: false,
 };
 
 const getters = {
@@ -25,7 +23,8 @@ const getters = {
     },
     isMobile(state) {
         return state.isMobile
-    }
+    },
+    isNavOpen: (state) => state.isNavOpen
 };
 
 const actions = {
@@ -33,12 +32,9 @@ const actions = {
 };
 
 const mutations = {
-    setDifficulty(state, difficulty) {
-        state.passedLevels.push(difficulty);
-    },
-    setIsMobile(state, isMobile) {
-        state.isMobile = isMobile
-    }
+    setDifficulty: (state, difficulty) => state.passedLevels.push(difficulty),
+    setIsMobile: (state, isMobile) => state.isMobile = isMobile,
+    setIsNavOpen: (state, isNavOpen) => state.isNavOpen = isNavOpen
 };
 
 export default {

@@ -11,6 +11,7 @@
 <script>
 import VIndex from "@/layout/VIndex.vue";
 import VLetter from "@/layout/VLetter.vue";
+import "@/assets/plugins/index.js";
 
 export default {
     data() {
@@ -31,6 +32,8 @@ export default {
                 window.innerHeight > window.innerWidth
             );
         });
+
+        // window.oncontextmenu = () => false;
     },
     watch: {
         $route: function () {

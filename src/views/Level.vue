@@ -6,6 +6,7 @@
             class="box"
             :key="index"
             :class="{ passed: isPassed(level) }"
+            :data-is-passed="!!isPassed(level)"
         >
             <p class="text">{{ level.row }} x {{ level.column }}</p>
         </router-link>
@@ -29,8 +30,13 @@ export default {
 
         _this.levels = $store.getters.getLevels;
     },
+    computed: {
+        isMobile() {
+            return this.$store.getters.isMobile;
+        },
+    },
     methods: {
-        isPassed: function (level) {
+        isPassed(level) {
             const $store = this.$store;
             const passedLevels = $store.getters.getPassedLevels;
 
@@ -50,25 +56,30 @@ export default {
 
     .box {
         @include inline-flex(center, center);
-        width: 25%;
-        height: 50%;
+        width: 100%;
+        height: 12.5%;
         box-sizing: border-box;
         cursor: pointer;
         font-size: 25px;
         border-radius: 10px;
         color: $color-black;
+        margin-top: 10px;
 
-        &:hover {
+        @media screen and (min-width: 1023px) {
+            margin-top: 0;
+            width: 25%;
+            height: 50%;
+        }
+
+        &:not([data-is-passed="true"]):hover {
             color: $color-white;
             background: $color-black;
         }
     }
 
     .passed {
-        &:hover {
-            color: $color-white;
-            background: $color-yellow;
-        }
+        color: $color-white;
+        background: $color-yellow;
     }
 }
 </style>
