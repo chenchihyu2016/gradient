@@ -10,46 +10,47 @@ export default class TouchEvent {
         this.endEvent = endEvent || null
     }
 
-    getSwipeDirection() {
+    getSwipeDirection () {
         const start = this.startEvent.changedTouches[0]
         const end = this.endEvent.changedTouches[0]
         const horizontalDifference = start.screenX - end.screenX
         const verticalDifference = start.screenY - end.screenY
+        let swipeDirection = null
 
         if (!start || !end) return null
 
         if (Math.abs(horizontalDifference) > Math.abs(verticalDifference)) {
             if (horizontalDifference >= TouchEvent.SWIPE_THRESHOLD)
-                return TouchEvent.SWIPE_LEFT
+                swipeDirection = TouchEvent.SWIPE_LEFT
             else if (horizontalDifference <= -TouchEvent.SWIPE_THRESHOLD)
-                return TouchEvent.SWIPE_RIGHT
+                swipeDirection = TouchEvent.SWIPE_RIGHT
         } else {
             if (verticalDifference >= TouchEvent.SWIPE_THRESHOLD)
-                return TouchEvent.SWIPE_UP
+                swipeDirection = TouchEvent.SWIPE_UP
             else if (verticalDifference <= -TouchEvent.SWIPE_THRESHOLD)
-                return TouchEvent.SWIPE_DOWN
+                swipeDirection = TouchEvent.SWIPE_DOWN
         }
 
-        return null
+        return swipeDirection
     }
 
-    isSwipeLeft() {
+    isSwipeLeft () {
         return this.getSwipeDirection() === TouchEvent.SWIPE_LEFT
     }
 
-    isSwipeRight() {
+    isSwipeRight () {
         return this.getSwipeDirection() === TouchEvent.SWIPE_RIGHT
     }
 
-    isSwipeUp() {
+    isSwipeUp () {
         return this.getSwipeDirection() === TouchEvent.SWIPE_UP
     }
 
-    isSwipeDown() {
+    isSwipeDown () {
         return this.getSwipeDirection() === TouchEvent.SWIPE_DOWN
     }
 
-    setEndEvent(endEvent) {
+    setEndEvent (endEvent) {
         this.endEvent = endEvent
     }
 }
