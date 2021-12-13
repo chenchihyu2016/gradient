@@ -2,7 +2,7 @@
 	<transition name="slide-fade" mode="out-in">
 		<div class="nav_background" v-if="isNavOpen">
 			<div class="left_nav">
-				<div class="close_icon" @click="closeNav">X</div>
+				<div class="close_icon" @click="closeNav">&times;</div>
 				<div class="item" @click="backToLevel" v-if="showBackToLevel">
 					<b-icon icon="arrow-bar-left" class="icon"></b-icon>
 					<span class="text">返回關卡頁</span>
@@ -87,6 +87,11 @@ export default {
 			@include flex(flex-start, center);
 			width: 100%;
 			border-bottom: 1px solid $color-white;
+			cursor: pointer;
+
+			&:hover {
+				color: $color-black;
+			}
 
 			&:last-child {
 				border-bottom: none;
@@ -101,7 +106,6 @@ export default {
 			.text {
 				display: inline-flex;
 				padding: 10px 0;
-				cursor: pointer;
 			}
 		}
 	}
