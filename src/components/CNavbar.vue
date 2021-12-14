@@ -68,7 +68,7 @@ export default {
     top: 0;
     bottom: 0;
     left: 0;
-    right: 0;
+    right: -50%;
     background: transparent;
     z-index: 999;
     backdrop-filter: blur(2px);
@@ -79,7 +79,7 @@ export default {
         flex-direction: column;
         color: $color-white;
         background: rgba($color-black, 0.3);
-        width: 60%;
+        width: 60vw;
         height: 100%;
         font-size: 24px;
         padding: 0 20px;
