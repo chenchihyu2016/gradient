@@ -214,8 +214,8 @@ export default {
 <style scoped lang='scss'>
 .outline {
 	@include flex(center, center);
-	width: 90%;
-	height: 90%;
+	width: 100%;
+	height: 100%;
 	box-sizing: border-box;
 	position: relative;
 	overflow: hidden;

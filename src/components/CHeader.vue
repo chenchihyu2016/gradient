@@ -16,7 +16,15 @@
 </template>
 
 <script>
+import CCircularPercentage from "./CCircularPercentage.vue";
 export default {
+	components: { CCircularPercentage },
+	data() {
+		return {
+			strokeDasharray: "30, 100",
+		};
+	},
+	created() {},
 	computed: {
 		showUnlock() {
 			const _this = this;

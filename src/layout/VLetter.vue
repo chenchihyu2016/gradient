@@ -1,11 +1,39 @@
 <template>
-	<div class="background">
+	<div
+		class="background"
+		@mousedown="calculating = true"
+		@mouseup="calculating = false"
+		@touchstart="calculating = true"
+		@touchend="calculating = false"
+	>
 		<slot></slot>
+		<CCircularPercentage
+			title="輕觸離開"
+			:timeToElapse="timeToElapse"
+			:calculating="calculating"
+			@reachFull="reachFull"
+		/>
 	</div>
 </template>
 
 <script>
-export default {};
+import CCircularPercentage from "../components/CCircularPercentage.vue";
+export default {
+	components: { CCircularPercentage },
+	data() {
+		return {
+			timeToElapse: 2,
+			calculating: false,
+		};
+	},
+	methods: {
+		reachFull() {
+			const _this = this;
+
+			_this.$router.push({ name: "Level" });
+		},
+	},
+};
 </script>
 
 <style scoped lang='scss'>

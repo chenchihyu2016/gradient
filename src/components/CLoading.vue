@@ -28,7 +28,7 @@ export default {
 	backdrop-filter: blur(2px);
 
 	.success_icon {
-		background: rgba($color-white, 0.5);
+		background: c;
 		width: 50px;
 		height: 50px;
 		border-radius: 10px;

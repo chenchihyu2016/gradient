@@ -76,7 +76,7 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
 	@include flex(center, center);
 	width: 100%;
 	margin: auto;
-	animation: slide-up 60s linear 0.5s 1 normal forwards;
+	// animation: slide-up 60s linear 0.5s 1 normal forwards;
 	position: absolute;
 	top: 10%;
 
