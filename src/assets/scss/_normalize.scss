@@ -28,6 +28,7 @@ body {
     background-color: rgba($color-orange, 0.05);
     overflow: hidden;
     font-size: 12px;
+    user-select: none;
 }
 
 @media only screen and (min-width: 1360px) {

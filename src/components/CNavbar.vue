@@ -1,113 +1,156 @@
 <template>
-	<transition name="slide-fade" mode="out-in">
-		<div class="nav_background" v-if="isNavOpen">
-			<div class="left_nav">
-				<div class="close_icon" @click="closeNav">&times;</div>
-				<div class="item" @click="backToLevel" v-if="showBackToLevel">
-					<b-icon icon="arrow-bar-left" class="icon"></b-icon>
-					<span class="text">返回關卡頁</span>
-				</div>
-			</div>
-		</div>
-	</transition>
+    <transition name="slide-fade" mode="out-in">
+        <div class="nav_background" v-if="isNavOpen" @click="closeNav">
+            <div class="left_nav">
+                <div class="close_icon" @click="closeNav">&#10006;</div>
+                <div class="description">
+                    <p>{{ description }}</p>
+                    <p v-if="showHiddenDescription" class="hidden_description">
+                        {{ hiddenDescription }}
+                    </p>
+                </div>
+                <div class="item" @click="backToLevel" v-if="showBackToLevel">
+                    <b-icon icon="arrow-bar-left" class="icon"></b-icon>
+                    <span class="text">返回關卡頁</span>
+                </div>
+            </div>
+        </div>
+    </transition>
 </template>
 
 <script>
+import Config from "@/../public/config.json";
 export default {
-	data() {
-		return {
-			showBackToLevel: false,
-		};
-	},
-	computed: {
-		isNavOpen() {
-			return this.$store.getters.isNavOpen;
-		},
-	},
-	watch: {
-		"$route.name": function () {
-			this.showBackToLevel = this.$route.name === "Gradient";
-		},
-	},
-	methods: {
-		backToLevel() {
-			this.$router.push({ name: "Level" });
+    data() {
+        return {
+            showBackToLevel: false,
+            description: Config.description,
+            hiddenDescription: Config.hiddenDescription,
+        };
+    },
+    computed: {
+        isNavOpen() {
+            return this.$store.getters.isNavOpen;
+        },
+        showHiddenDescription() {
+            const _this = this;
+            const $store = _this.$store;
 
-			this.$store.commit("setIsNavOpen", false);
-		},
-		closeNav() {
-			this.$store.commit("setIsNavOpen", false);
-		},
-	},
+            return true;
+
+            return (
+                $store.getters.getPassedLevels.length ===
+                $store.getters.getLevels.length
+            );
+        },
+    },
+    watch: {
+        "$route.name": function () {
+            this.showBackToLevel = this.$route.name === "Gradient";
+        },
+    },
+    methods: {
+        backToLevel() {
+            this.$router.push({ name: "Level" });
+
+            this.$store.commit("setIsNavOpen", false);
+        },
+        closeNav() {
+            this.$store.commit("setIsNavOpen", false);
+        },
+    },
 };
 </script>
 
 <style scoped lang='scss'>
 .nav_background {
-	position: fixed;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	background: transparent;
-	z-index: 999;
-	backdrop-filter: blur(2px);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: transparent;
+    z-index: 999;
+    backdrop-filter: blur(2px);
 
-	.left_nav {
-		@include flex(flex-end, flex-start);
-		position: relative;
-		flex-direction: column;
-		color: $color-white;
-		background: rgba($color-black, 0.3);
-		width: 70%;
-		height: 100%;
-		font-size: 24px;
+    .left_nav {
+        @include flex(flex-end, flex-start);
+        position: relative;
+        flex-direction: column;
+        color: $color-white;
+        background: rgba($color-black, 0.3);
+        width: 60%;
+        height: 100%;
+        font-size: 24px;
+        padding: 0 20px;
 
-		@media screen and (min-width: 1023px) {
-			width: 20%;
-		}
+        @media screen and (min-width: 1023px) {
+            width: 20%;
+        }
 
-		.close_icon {
-			@include flex(center, center);
-			position: absolute;
-			top: 0;
-			right: 0;
-			width: 50px;
-			height: 50px;
-			color: $color-white;
-			cursor: pointer;
-			display: none;
+        .close_icon {
+            @include flex(center, center);
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40px;
+            height: 50px;
+            color: $color-white;
+            cursor: pointer;
+            display: none;
 
-			@media screen and (min-width: 1023px) {
-				display: flex;
-			}
-		}
+            @media screen and (min-width: 1023px) {
+                display: flex;
+            }
+        }
 
-		.item {
-			@include flex(flex-start, center);
-			width: 100%;
-			border-bottom: 1px solid $color-white;
-			cursor: pointer;
+        .description {
+            position: absolute;
+            top: 50px;
+            left: 20px;
+            right: 20px;
+            font-size: 20px;
+            line-height: 30px;
+            text-align: justify;
 
-			&:hover {
-				color: $color-black;
-			}
+            @media screen and (min-width: 1023px) {
+                font-size: 24px;
+                line-height: 30px;
+            }
 
-			&:last-child {
-				border-bottom: none;
-			}
+            .hidden_description {
+                margin-top: 20px;
+                font-size: 16px;
+                line-height: 24px;
+                opacity: 0.8;
+            }
+        }
 
-			.icon {
-				@include inline-flex(center, center);
-				height: 100%;
-				padding: 0 20px;
-			}
+        .item {
+            @include flex(flex-start, center);
+            width: 100%;
+            border-bottom: 1px solid $color-white;
+            cursor: pointer;
 
-			.text {
-				display: inline-flex;
-				padding: 10px 0;
-			}
-		}
-	}
+            &:hover {
+                color: $color-black;
+            }
+
+            &:last-child {
+                border-bottom: none;
+            }
+
+            .icon {
+                @include inline-flex(center, center);
+                height: 100%;
+                padding-right: 20px;
+            }
+
+            .text {
+                display: inline-flex;
+                padding: 10px 0;
+            }
+        }
+    }
 }
 </style>
