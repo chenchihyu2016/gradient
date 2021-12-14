@@ -72,8 +72,8 @@ export default {
 			position: absolute;
 			top: 0;
 			right: 0;
-			width: 30px;
-			height: 30px;
+			width: 50px;
+			height: 50px;
 			color: $color-white;
 			cursor: pointer;
 			display: none;
