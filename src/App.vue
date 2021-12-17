@@ -16,7 +16,7 @@ import "@/assets/plugins/index.js";
 export default {
 	data() {
 		return {
-			layout: "VIndex",
+			layout: "VLetter",
 		};
 	},
 	components: {

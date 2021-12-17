@@ -4,9 +4,7 @@
 			<div v-if="content.images.length > 0" class="item" :key="index">
 				<div class="images">
 					<div class="image">
-						<div class="number_of_images" v-if="isMobile">
-							{{ content.images.length }} 張
-						</div>
+						<div class="number_of_images">{{ content.images.length }} 張</div>
 						<img
 							class="img"
 							v-for="image in content.images"
@@ -111,25 +109,24 @@ export default {
 
 			.number_of_images {
 				position: absolute;
-				bottom: 2.5%;
-				right: 20%;
+				top: 2.5%;
+				left: 12.5%;
 				color: $color-white;
 				background: rgba($color-black, 0.5);
 				padding: 10px;
+				border-radius: 0 0 5px 0;
 
 				@media screen and (min-width: 1023px) {
-					right: 2%;
+					left: 5%;
 				}
 			}
 
 			.image {
-				@include inline-flex(center, center);
-				flex-direction: column;
-				flex-wrap: wrap;
-				width: 60%;
+				@include inline-flex(flex-start, center);
+				flex-wrap: nowrap;
+				width: 75%;
 				height: 95%;
-				overflow: auto;
-				border: 2px solid $color-red;
+				overflow: scroll;
 
 				&::-webkit-scrollbar {
 					display: none;
@@ -137,12 +134,20 @@ export default {
 
 				@media screen and (min-width: 1023px) {
 					width: 90%;
+
+					&::-webkit-scrollbar {
+						background: transparent; /* Optional: just make scrollbar invisible */
+						display: block;
+					}
+
+					&::-webkit-scrollbar-thumb {
+						background: #ffffff10;
+					}
 				}
 
 				.img {
 					max-width: 100%;
 					max-height: 100%;
-					height: 100%;
 					margin-right: 5%;
 					border-radius: 5px;
 

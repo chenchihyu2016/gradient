@@ -15,13 +15,13 @@ const routes = [
         props: true,
     },
     {
-        path: '/',
+        path: '/level',
         name: 'Level',
         component: Level,
         meta: { layout: 'VIndex' }
     },
     {
-        path: '/letter',
+        path: '/',
         name: 'Letter',
         component: Letter,
         meta: { layout: 'VLetter' }

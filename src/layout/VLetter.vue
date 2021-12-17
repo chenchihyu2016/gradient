@@ -38,7 +38,7 @@ export default {
 
 			if (which === 2 || which === 3) return;
 
-			// _this.calculating = true;
+			_this.calculating = true;
 		},
 		stopCalculating() {
 			const _this = this;
@@ -58,7 +58,7 @@ export default {
 	height: 100vh;
 	color: $color-white;
 	position: relative;
-	overflow: hidden;
-	// overflow: auto;
+	// overflow: hidden;
+	overflow: auto;
 }
 </style>
