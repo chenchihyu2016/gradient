@@ -1,10 +1,13 @@
 <template>
 	<div class="curtain">
+		<div class="opening_text">2021測試</div>
 		<template v-for="(content, index) in contents">
 			<div v-if="content.images.length > 0" class="item" :key="index">
 				<div class="images">
-					<div class="image">
-						<div class="number_of_images">{{ content.images.length }} 張</div>
+					<div class="image" :data-number-of-images="content.images.length">
+						<div class="number_of_images" v-if="isMobile">
+							{{ content.images.length }} 張
+						</div>
 						<img
 							class="img"
 							v-for="image in content.images"
@@ -65,11 +68,21 @@ export default {
 <style scoped lang='scss'>
 .curtain {
 	@include flex(center, center);
+	flex-direction: column;
 	width: 100%;
 	margin: auto;
-	// animation: slide-up 60s linear 0.5s 1 normal forwards;
+	// animation: slide-up 60s linear 5s 1 normal forwards;
 	position: absolute;
-	top: 5%;
+	top: 0;
+	overflow: hidden;
+
+	.opening_text {
+		@include flex(center, center);
+		width: 100%;
+		height: 100vh;
+		font-size: 50px;
+		animation: fade 5s linear 0s 1 normal forwards;
+	}
 
 	.item {
 		@include inline-flex(center, center);
@@ -140,8 +153,23 @@ export default {
 						display: block;
 					}
 
+					&::-webkit-scrollbar-corner {
+						display: none;
+					}
+
 					&::-webkit-scrollbar-thumb {
-						background: #ffffff10;
+						background: rgba($color-white, 0.3);
+						border-radius: 5px;
+					}
+
+					&[data-number-of-images="1"],
+					&[data-number-of-images="2"],
+					&[data-number-of-images="3"] {
+						justify-content: center;
+
+						&::-webkit-scrollbar {
+							display: none;
+						}
 					}
 				}
 
@@ -169,15 +197,11 @@ export default {
 
 			@media screen and (min-width: 1023px) {
 				flex: 3;
-				height: 80%;
+				height: 90%;
 				border-top: none;
 				border-left: 1px solid $color-white;
 				margin: 0 0 0 10px;
 				padding-right: 0;
-
-				&:nth-child(2n) {
-					order: 1;
-				}
 			}
 		}
 	}
@@ -200,6 +224,21 @@ export default {
 @keyframes slide-up {
 	100% {
 		top: -250%;
+	}
+}
+
+@keyframes fade {
+	0% {
+		opacity: 0;
+	}
+	25% {
+		opacity: 1;
+	}
+	75% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
 	}
 }
 </style>

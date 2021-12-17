@@ -20,9 +20,14 @@
 import CCircularPercentage from "../components/CCircularPercentage.vue";
 export default {
 	components: { CCircularPercentage },
+	computed: {
+		isMobile() {
+			return this.$store.getters.isMobile;
+		},
+	},
 	data() {
 		return {
-			timeToElapse: 2,
+			timeToElapse: this.isMobile ? 2 : 3,
 			calculating: false,
 		};
 	},
