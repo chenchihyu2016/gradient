@@ -1,21 +1,27 @@
 <template>
-    <transition name="slide-fade" mode="out-in">
-        <div class="nav_background" v-if="isNavOpen" @click="closeNav">
-            <div class="left_nav">
-                <div class="close_icon" @click="closeNav">&#10006;</div>
-                <div class="description">
-                    <p>{{ description }}</p>
-                    <p v-if="showHiddenDescription" class="hidden_description">
-                        {{ hiddenDescription }}
-                    </p>
-                </div>
-                <div class="item" @click="backToLevel" v-if="showBackToLevel">
-                    <b-icon icon="arrow-bar-left" class="icon"></b-icon>
-                    <span class="text">返回關卡頁</span>
-                </div>
+    <div
+        class="nav_background"
+        @click.self="closeNav"
+        :class="{ showNavbackground }"
+    >
+        <div class="left_nav" :class="{ isNavOpen }">
+            <div class="small_block" v-if="isMobile">
+                <b-icon icon="arrow-left" v-if="isNavOpen" class="icon" />
+                <b-icon icon="arrow-right" v-else class="icon" />
+            </div>
+            <div class="close_icon" @click.stop="closeNav">&#10006;</div>
+            <div class="description">
+                <p>{{ description }}</p>
+                <p v-if="showHiddenDescription" class="hidden_description">
+                    {{ hiddenDescription }}
+                </p>
+            </div>
+            <div class="item" @click="backToLevel" v-if="showBackToLevel">
+                <b-icon icon="arrow-bar-left" class="icon"></b-icon>
+                <span class="text">返回關卡頁</span>
             </div>
         </div>
-    </transition>
+    </div>
 </template>
 
 <script>
@@ -26,12 +32,15 @@ export default {
             showBackToLevel: false,
             description: Config.description,
             hiddenDescription: Config.hiddenDescription,
+            showNavbackground: this.$store.getters.isNavOpen,
         };
     },
     computed: {
         isNavOpen() {
             return this.$store.getters.isNavOpen;
-            // return true;
+        },
+        isMobile() {
+            return this.$store.getters.isMobile;
         },
         showHiddenDescription() {
             const _this = this;
@@ -49,15 +58,27 @@ export default {
         "$route.name": function () {
             this.showBackToLevel = this.$route.name === "Gradient";
         },
+        isNavOpen: function () {
+            const _this = this;
+
+            if (_this.isNavOpen) _this.showNavbackground = true;
+            else
+                setTimeout(() => {
+                    this.showNavbackground = false;
+                }, 300);
+        },
     },
     methods: {
         backToLevel() {
-            this.$router.push({ name: "Level" });
+            const _this = this;
 
-            this.$store.commit("setIsNavOpen", false);
+            _this.$router.push({ name: "Level" });
+            _this.closeNav();
         },
         closeNav() {
-            this.$store.commit("setIsNavOpen", false);
+            const _this = this;
+
+            _this.$store.commit("setIsNavOpen", false);
         },
     },
 };
@@ -69,9 +90,9 @@ export default {
     top: 0;
     bottom: 0;
     left: 0;
-    right: -50%;
+    right: 0;
     background: transparent;
-    z-index: 999;
+    z-index: -1;
     backdrop-filter: blur(2px);
 
     .left_nav {
@@ -80,13 +101,31 @@ export default {
         flex-direction: column;
         color: $color-white;
         background: rgba($color-black, 0.3);
+        transform: translateX(-100%);
         width: 60vw;
         height: 100%;
         font-size: 24px;
         padding: 0 20px;
+        transition: 0.3s transform ease;
 
         @media screen and (min-width: 1023px) {
             width: 20vw;
+        }
+
+        .small_block {
+            @include flex(center, center);
+            position: absolute;
+            top: 0;
+            right: -30px;
+            width: 30px;
+            height: 8vh;
+            background: rgba($color-black, 0.3);
+            border-radius: 0 10px 10px 0;
+
+            .icon {
+                width: 50%;
+                height: 50%;
+            }
         }
 
         .close_icon {
@@ -107,7 +146,7 @@ export default {
 
         .description {
             position: absolute;
-            top: 50px;
+            top: 2%;
             left: 20px;
             right: 20px;
             font-size: 20px;
@@ -115,6 +154,7 @@ export default {
             text-align: justify;
 
             @media screen and (min-width: 1023px) {
+                top: 50px;
                 font-size: 24px;
                 line-height: 30px;
             }
@@ -153,5 +193,13 @@ export default {
             }
         }
     }
+
+    .isNavOpen {
+        transform: translateX(0);
+    }
+}
+
+.showNavbackground {
+    z-index: 9999;
 }
 </style>

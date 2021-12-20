@@ -16,7 +16,7 @@ import "@/assets/plugins/index.js";
 export default {
     data() {
         return {
-            layout: "VIndex",
+            layout: this.$store.getters.meta,
         };
     },
     components: {
@@ -33,7 +33,7 @@ export default {
             );
         });
 
-        // window.oncontextmenu = () => false;
+        window.oncontextmenu = () => false;
     },
     watch: {
         $route: function () {
@@ -41,6 +41,11 @@ export default {
             const $route = _this.$route;
 
             _this.layout = $route.meta.layout;
+        },
+        "$store.getters.meta": function () {
+            const _this = this;
+
+            _this.layout = _this.$store.getters.meta;
         },
     },
 };

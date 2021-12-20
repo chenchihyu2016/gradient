@@ -2,7 +2,7 @@
     <div class="curtain">
         <div class="opening_text">
             波波與我的 2021 回顧
-            <p class="inner_text">將會有音樂撥放，記得戴上耳機</p>
+            <p class="inner_text">將會有音樂撥放，請記得戴上耳機</p>
             <b-icon icon="headphones" style="display: block" />
         </div>
         <template v-for="(content, index) in contents">
@@ -44,9 +44,8 @@ export default {
     created() {
         const _this = this;
 
-        // setTimeout(() => {
-        // 	_this.sound.play();
-        // }, 1000);
+        _this.$store.commit("setMeta", "VLetter");
+        _this.sound.play();
     },
     computed: {
         isMobile() {
@@ -78,7 +77,7 @@ export default {
     flex-direction: column;
     width: 100%;
     margin: auto;
-    // animation: slide-up 60s linear 5s 1 normal forwards;
+    animation: slide-up 270s linear 5s 1 normal forwards;
     position: absolute;
     top: 0;
     overflow: hidden;
@@ -89,7 +88,7 @@ export default {
         width: 100%;
         height: 100vh;
         font-size: 24px;
-        // animation: fade 5s linear 0s 1 normal forwards;
+        animation: fade 5s linear 0s 1 normal forwards;
 
         .inner_text {
             font-size: 12px;
@@ -121,6 +120,7 @@ export default {
             height: 100%;
             width: 100%;
             overflow: auto;
+            margin-bottom: 10px;
 
             &::-webkit-scrollbar {
                 display: none;
@@ -135,23 +135,19 @@ export default {
 
             .number_of_images {
                 position: absolute;
-                top: 2.5%;
+                top: -1%;
                 left: 10%;
                 color: $color-white;
                 background: rgba($color-black, 0.7);
                 padding: 10px;
                 border-radius: 0 0 5px 0;
-
-                @media screen and (min-width: 1023px) {
-                    left: 5%;
-                }
             }
 
             .image {
                 @include inline-flex(flex-start, center);
                 flex-wrap: nowrap;
                 width: 80%;
-                height: 95%;
+                height: 100%;
                 overflow: scroll;
 
                 &::-webkit-scrollbar {
@@ -205,7 +201,7 @@ export default {
             margin: 0 20px;
             border-top: 1px solid $color-white;
             padding: 0 10px;
-            line-height: 18px;
+            line-height: 20px;
 
             @media screen and (min-width: 1023px) {
                 flex: 3;
@@ -235,7 +231,7 @@ export default {
 
 @keyframes slide-up {
     100% {
-        top: -250%;
+        top: -690%;
     }
 }
 
