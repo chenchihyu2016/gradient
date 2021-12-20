@@ -1,9 +1,10 @@
 <template>
-    <div class="curtain">
-        <div class="opening_text">
+    <div class="curtain" ref="curtain">
+        <div class="opening_text" ref="openingText">
             波波與我的 2021 回顧
             <p class="inner_text">將會有音樂撥放，請記得戴上耳機</p>
             <b-icon icon="headphones" style="display: block" />
+            <button class="start_button" @click="start">開始</button>
         </div>
         <template v-for="(content, index) in contents">
             <div v-if="content.images.length > 0" class="item" :key="index">
@@ -45,7 +46,6 @@ export default {
         const _this = this;
 
         _this.$store.commit("setMeta", "VLetter");
-        _this.sound.play();
     },
     computed: {
         isMobile() {
@@ -53,6 +53,16 @@ export default {
         },
     },
     methods: {
+        start() {
+            const _this = this;
+            const curtain = _this.$refs.curtain;
+            const openingText = _this.$refs.openingText;
+
+            curtain.style.animationPlayState = "running";
+            openingText.style.animationPlayState = "running";
+
+            _this.sound.play();
+        },
         backToLevel() {
             const $router = this.$router;
 
@@ -77,7 +87,8 @@ export default {
     flex-direction: column;
     width: 100%;
     margin: auto;
-    animation: slide-up 270s linear 5s 1 normal forwards;
+    animation: slide-up 270s linear 2.5s 1 normal forwards;
+    animation-play-state: paused;
     position: absolute;
     top: 0;
     overflow: hidden;
@@ -88,11 +99,31 @@ export default {
         width: 100%;
         height: 100vh;
         font-size: 24px;
-        animation: fade 5s linear 0s 1 normal forwards;
+        animation: fade-out 2s linear 0s 1 normal forwards;
+        animation-play-state: paused;
 
         .inner_text {
             font-size: 12px;
             margin: 20px 0;
+        }
+
+        .start_button {
+            border: 1px solid $color-white;
+            border-radius: 5px;
+            margin-top: 20px;
+            padding: 5px 15px;
+            font-size: 16px;
+            background: transparent;
+            color: $color-white;
+            cursor: pointer;
+            transition: 0.3s all ease;
+
+            @media (hover: hover) {
+                &:hover {
+                    background: $color-white;
+                    color: rgba($color-black, 0.85);
+                }
+            }
         }
     }
 
@@ -235,14 +266,8 @@ export default {
     }
 }
 
-@keyframes fade {
+@keyframes fade-out {
     0% {
-        opacity: 0;
-    }
-    25% {
-        opacity: 1;
-    }
-    75% {
         opacity: 1;
     }
     100% {
