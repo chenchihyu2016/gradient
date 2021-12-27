@@ -63,12 +63,7 @@ export default {
         font-size: 25px;
         border-radius: 10px;
         color: $color-black;
-        margin-top: 10px;
-
-        &:first-child,
-        &:last-child {
-            margin-top: 0;
-        }
+        margin-top: 5px;
 
         @media screen and (min-width: 1023px) {
             margin-top: 0;
