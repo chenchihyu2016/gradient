@@ -87,7 +87,7 @@ export default {
         randomize() {
             const _this = this;
             let time = 1;
-            const times = 11;
+            const times = 15;
             const array = _this.array;
             const arrayLength = array.length;
 
