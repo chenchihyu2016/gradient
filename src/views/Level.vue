@@ -57,13 +57,18 @@ export default {
     .box {
         @include inline-flex(center, center);
         width: 100%;
-        height: 12.5%;
+        height: 8%;
         box-sizing: border-box;
         cursor: pointer;
         font-size: 25px;
         border-radius: 10px;
         color: $color-black;
         margin-top: 10px;
+
+        &:first-child,
+        &:last-child {
+            margin-top: 0;
+        }
 
         @media screen and (min-width: 1023px) {
             margin-top: 0;
