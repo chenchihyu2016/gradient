@@ -3,7 +3,7 @@
         <div
             class="stop_sign"
             :class="{ calculating }"
-            v-if="calculating && value >= 25"
+            v-if="(calculating && value >= 25) || isLetterFinished"
         >
             <p class="title">{{ title }}</p>
             <svg viewBox="0 0 36 36" class="circular_percentage">
@@ -34,6 +34,10 @@ export default {
             type: Number,
         },
         calculating: {
+            default: false,
+            type: Boolean,
+        },
+        isLetterFinished: {
             default: false,
             type: Boolean,
         },

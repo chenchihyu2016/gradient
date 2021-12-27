@@ -11,6 +11,7 @@
             title="輕觸離開"
             :timeToElapse="timeToElapse"
             :calculating="calculating"
+            :isLetterFinished="isLetterFinished"
             @reachFull="reachFull"
         />
     </div>
@@ -29,7 +30,15 @@ export default {
         return {
             timeToElapse: this.isMobile ? 2 : 3,
             calculating: false,
+            isLetterFinished: false,
         };
+    },
+    mounted() {
+        const _this = this;
+
+        setTimeout(() => {
+            _this.isLetterFinished = true;
+        }, 220000);
     },
     methods: {
         reachFull() {
@@ -64,6 +73,5 @@ export default {
     color: $color-white;
     position: relative;
     overflow: hidden;
-    // overflow: auto;
 }
 </style>

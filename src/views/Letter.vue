@@ -2,12 +2,16 @@
     <div class="curtain" ref="curtain">
         <div class="opening_text" ref="openingText">
             波波與我的 2021 回顧
-            <p class="inner_text">將會有音樂撥放，請記得戴上耳機</p>
+            <p class="inner_text">將會有音樂撥放，記得戴上耳機喔</p>
             <b-icon icon="headphones" style="display: block" />
             <button class="start_button" @click="start">開始</button>
         </div>
         <template v-for="(content, index) in contents">
-            <div v-if="content.images.length > 0" class="item" :key="index">
+            <div
+                v-if="content.images.length > 0"
+                class="item images_with_text"
+                :key="index"
+            >
                 <div class="images">
                     <div
                         class="image"
@@ -26,6 +30,7 @@
                 </div>
                 <div class="text">{{ content.text }}</div>
             </div>
+
             <div v-else class="item text_only" :key="index">
                 <div class="inner_text">{{ content.text }}</div>
             </div>
@@ -38,8 +43,9 @@ import config from "@/../public/config.json";
 export default {
     data() {
         return {
-            sound: new Audio(require("@/assets/music/soundtrack.mp3")),
+            sound: new Audio(require("@/assets/music/soundtrack-2.mp3")),
             contents: config.contents,
+            showTextOnly: false,
         };
     },
     created() {
@@ -87,10 +93,10 @@ export default {
     flex-direction: column;
     width: 100%;
     margin: auto;
-    animation: slide-up 270s linear 2.5s 1 normal forwards;
+    animation: slide-up 220s linear 2.5s 1 normal forwards;
     animation-play-state: paused;
     position: absolute;
-    top: 0;
+    top: 0%;
     overflow: hidden;
 
     .opening_text {
@@ -118,11 +124,9 @@ export default {
             cursor: pointer;
             transition: 0.3s all ease;
 
-            @media (hover: hover) {
-                &:hover {
-                    background: $color-white;
-                    color: rgba($color-black, 0.85);
-                }
+            &:hover {
+                background: $color-white;
+                color: rgba($color-black, 0.85);
             }
         }
     }
@@ -136,7 +140,7 @@ export default {
         backdrop-filter: blur(2px);
         background: #ffffff10;
         border-radius: 10px;
-        padding: 10px;
+        padding: 10px 0;
 
         @media screen and (min-width: 1023px) {
             width: 90%;
@@ -147,11 +151,11 @@ export default {
         .images {
             @include inline-flex(center, center);
             position: relative;
-            flex: 7.5;
+            flex: 8;
             height: 100%;
             width: 100%;
             overflow: auto;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
 
             &::-webkit-scrollbar {
                 display: none;
@@ -165,12 +169,15 @@ export default {
             }
 
             .number_of_images {
+                @include flex(center, center);
                 position: absolute;
-                top: -1%;
+                width: 10%;
+                height: 10%;
+                top: -0.5%;
                 left: 10%;
                 color: $color-white;
                 background: rgba($color-black, 0.7);
-                padding: 10px;
+                padding: 0 10px;
                 border-radius: 0 0 5px 0;
             }
 
@@ -227,12 +234,13 @@ export default {
 
         .text {
             @include inline-flex(center, center);
-            flex: 2.5;
+            flex: 2;
             text-align: justify;
-            margin: 0 20px;
+            margin: 5px 20px 0;
             border-top: 1px solid $color-white;
-            padding: 0 10px;
+            padding: 5px 10px;
             line-height: 20px;
+            white-space: pre-line;
 
             @media screen and (min-width: 1023px) {
                 flex: 3;
@@ -240,9 +248,14 @@ export default {
                 border-top: none;
                 border-left: 1px solid $color-white;
                 margin: 0 0 0 10px;
-                padding-right: 0;
+                padding-right: 10px;
+                line-height: 30px;
             }
         }
+    }
+
+    .images_with_text {
+        animation: fade-at-last 218s ease 0s 1 normal forwards;
     }
 
     .text_only {
@@ -252,6 +265,7 @@ export default {
         background-color: #ffffff10;
         border-radius: 10px;
         text-align: justify;
+        white-space: pre-line;
 
         .inner_text {
             margin: 0 20px;
@@ -262,7 +276,7 @@ export default {
 
 @keyframes slide-up {
     100% {
-        top: -690%;
+        top: -680%;
     }
 }
 
@@ -270,6 +284,16 @@ export default {
     0% {
         opacity: 1;
     }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes fade-at-last {
+    98% {
+        opacity: 1;
+    }
+
     100% {
         opacity: 0;
     }

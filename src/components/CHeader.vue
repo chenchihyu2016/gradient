@@ -15,6 +15,10 @@
             >
                 解鎖</router-link
             >
+            <div v-else class="unlock">
+                {{ $store.getters.getPassedLevels.length }} /
+                {{ $store.getters.getLevels.length }}
+            </div>
         </transition>
     </div>
 </template>
@@ -34,7 +38,7 @@ export default {
             const _this = this;
             const $store = _this.$store;
 
-            return true;
+            // return true;
 
             return (
                 $store.getters.getPassedLevels.length ===
@@ -98,7 +102,6 @@ export default {
 
         &:hover {
             color: rgba($color-gold, 0.5);
-            // border: rgba($color-gold, 0.5) 2px solid;
         }
     }
 }

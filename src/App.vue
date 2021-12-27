@@ -24,6 +24,12 @@ export default {
         VLetter,
     },
     mounted() {
+        const _this = this;
+
+        document.title = "Gradiently";
+
+        window.oncontextmenu = () => false;
+
         window.addEventListener("resize", () => {
             const _this = this;
 
@@ -33,7 +39,7 @@ export default {
             );
         });
 
-        window.oncontextmenu = () => false;
+        _this.iphoneHandle();
     },
     watch: {
         $route: function () {
@@ -46,6 +52,43 @@ export default {
             const _this = this;
 
             _this.layout = _this.$store.getters.meta;
+        },
+    },
+    methods: {
+        iphoneHandle() {
+            let lastTouchEnd = 0;
+
+            document.addEventListener(
+                "touchstart",
+                (event) => {
+                    if (event.touches.length > 1) event.preventDefault();
+                },
+                { passive: false }
+            );
+
+            document.addEventListener(
+                "touchend",
+                (event) => {
+                    const now = new Date().getTime();
+
+                    if (now - lastTouchEnd <= 300) event.preventDefault();
+
+                    lastTouchEnd = now;
+                },
+                false
+            );
+
+            if (
+                navigator.userAgent.match(/iPhone/i) ||
+                navigator.userAgent.match(/iPad/i)
+            ) {
+                /* iOS hides Safari address bar */
+                window.addEventListener("load", function () {
+                    setTimeout(function () {
+                        window.scrollTo(0, 1);
+                    }, 1000);
+                });
+            }
         },
     },
 };

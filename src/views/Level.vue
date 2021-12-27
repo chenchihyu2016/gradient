@@ -71,9 +71,11 @@ export default {
             height: 50%;
         }
 
-        &:not([data-is-passed="true"]):hover {
-            color: $color-white;
-            background: $color-black;
+        @media (hover: hover) {
+            &:not([data-is-passed="true"]):hover {
+                color: $color-white;
+                background: $color-black;
+            }
         }
     }
 

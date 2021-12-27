@@ -46,7 +46,7 @@ export default {
             const _this = this;
             const $store = _this.$store;
 
-            return true;
+            // return true;
 
             return (
                 $store.getters.getPassedLevels.length ===
@@ -118,7 +118,7 @@ export default {
             top: 0;
             right: -30px;
             width: 30px;
-            height: 8vh;
+            height: 7vh;
             background: rgba($color-black, 0.3);
             border-radius: 0 10px 10px 0;
 
