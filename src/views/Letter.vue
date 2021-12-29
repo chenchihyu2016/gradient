@@ -43,7 +43,7 @@ import config from "@/../public/config.json";
 export default {
     data() {
         return {
-            sound: new Audio(require("@/assets/music/soundtrack-2.mp3")),
+            sound: new Audio(require("@/assets/music/soundtrack.mp3")),
             contents: config.contents,
             showTextOnly: false,
         };
@@ -93,7 +93,7 @@ export default {
     flex-direction: column;
     width: 100%;
     margin: auto;
-    animation: slide-up 220s linear 2.5s 1 normal forwards;
+    animation: slide-up 269s linear 2.5s 1 normal forwards;
     animation-play-state: paused;
     position: absolute;
     top: 0%;
@@ -255,7 +255,7 @@ export default {
     }
 
     .images_with_text {
-        animation: fade-at-last 218s ease 0s 1 normal forwards;
+        animation: fade-at-last 267s ease 0s 1 normal forwards;
     }
 
     .text_only {

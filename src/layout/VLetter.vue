@@ -38,7 +38,7 @@ export default {
 
         setTimeout(() => {
             _this.isLetterFinished = true;
-        }, 220000);
+        }, 267000);
     },
     methods: {
         reachFull() {
@@ -72,6 +72,10 @@ export default {
     height: 100vh;
     color: $color-white;
     position: relative;
-    overflow: hidden;
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
 </style>

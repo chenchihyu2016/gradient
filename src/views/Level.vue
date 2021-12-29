@@ -57,7 +57,7 @@ export default {
     .box {
         @include inline-flex(center, center);
         width: 100%;
-        height: 11.5%;
+        height: 8%;
         box-sizing: border-box;
         cursor: pointer;
         font-size: 25px;
@@ -67,7 +67,7 @@ export default {
 
         @media screen and (min-width: 1023px) {
             margin-top: 0;
-            width: 25%;
+            width: 20%;
             height: 50%;
         }
 

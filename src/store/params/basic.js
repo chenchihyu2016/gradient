@@ -8,6 +8,8 @@ const initialState = {
         { row: 3, column: 6, difficulty: 6 },
         { row: 4, column: 5, difficulty: 7 },
         { row: 4, column: 6, difficulty: 8 },
+        { row: 5, column: 6, difficulty: 9 },
+        { row: 6, column: 6, difficulty: 10 },
     ],
     passedLevels: [],
     isMobile: window.innerHeight > window.innerWidth,
