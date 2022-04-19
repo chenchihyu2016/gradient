@@ -16,7 +16,7 @@
                     {{ hiddenDescription }}
                 </p>
             </div>
-            <div class="item" @click="backToLevel" v-if="showBackToLevel">
+            <div class="item" @click="backToLevel">
                 <b-icon icon="arrow-bar-left" class="icon"></b-icon>
                 <span class="text">返回關卡頁</span>
             </div>

@@ -1,10 +1,10 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Gradient from '@/views/Gradient.vue'
-import Level from '@/views/Level.vue'
-import Letter from '@/views/Letter.vue'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Gradient from '@/views/Gradient.vue';
+import Level from '@/views/Level.vue';
+// import Letter from '@/views/Letter.vue';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
     {
@@ -20,16 +20,16 @@ const routes = [
         component: Level,
         meta: { layout: 'VIndex' }
     },
-    {
-        path: '/letter',
-        name: 'Letter',
-        component: Letter,
-        meta: { layout: 'VLetter' }
-    },
-]
+    // {
+    //     path: '/letter',
+    //     name: 'Letter',
+    //     component: Letter,
+    //     meta: { layout: 'VLetter' }
+    // },
+];
 
 const router = new VueRouter({
     routes
-})
+});
 
-export default router
+export default router;
