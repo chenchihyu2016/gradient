@@ -48,10 +48,12 @@ export default {
 
             // return true;
 
-            return (
-                $store.getters.getPassedLevels.length ===
-                $store.getters.getLevels.length
-            );
+            return false;
+
+            // return (
+            //     $store.getters.getPassedLevels.length ===
+            //     $store.getters.getLevels.length
+            // );
         },
     },
     watch: {

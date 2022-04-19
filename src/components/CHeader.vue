@@ -38,9 +38,14 @@ export default {
             const _this = this;
             const $store = _this.$store;
 
+            // return true;
+
             return false;
 
-            // return $store.getters.getPassedLevels.length === $store.getters.getLevels.length;
+            return (
+                $store.getters.getPassedLevels.length ===
+                $store.getters.getLevels.length
+            );
         },
         isMobile() {
             return this.$store.getters.isMobile;

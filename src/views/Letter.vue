@@ -1,9 +1,5 @@
 <template>
-    <div>EMPTY PAGE</div>
+    <div class="empty_page">SORRY, THE PAGE YOU ARE LOOKING FOR DOES NOT EXIST.</div>
 </template>
 
-<script>
-</script>
-
-<style scoped lang='scss'>
-</style>
+<script></script>
